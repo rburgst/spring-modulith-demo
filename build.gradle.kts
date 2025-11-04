@@ -8,36 +8,43 @@ group = "com.gofore"
 version = "0.0.1-SNAPSHOT"
 description = "spring-modulith-demo"
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+allprojects {
+    repositories {
+        mavenCentral()
     }
-}
-
-repositories {
-    mavenCentral()
 }
 
 extra["springModulithVersion"] = "1.4.4"
 
-dependencies {
-    implementation("org.springframework.modulith:spring-modulith-starter-core")
-    implementation("org.springframework.modulith:spring-modulith-events-api")
-
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.modulith:spring-modulith-starter-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
 dependencyManagement {
     imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
         mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+subprojects {
+    apply(plugin = "java")
+    apply(plugin = "io.spring.dependency-management")
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    extra["springModulithVersion"] = "1.4.4"
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
+            mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
+        }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }
+
+// Root project doesn't need dependencies - the app module contains the main application
