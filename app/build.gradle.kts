@@ -7,9 +7,13 @@ dependencies {
     implementation(project(":product-impl"))
     implementation(project(":notification-api"))
     implementation(project(":notification-impl"))
+    implementation(project(":inventory-api"))
+    implementation(project(":inventory-impl"))
 
     implementation("org.springframework.modulith:spring-modulith-starter-core")
     implementation("org.springframework.modulith:spring-modulith-events-api")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.h2database:h2")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
