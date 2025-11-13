@@ -15,6 +15,7 @@
  */
 package com.gofore.springmodulithdemo.app;
 
+import com.gofore.springmodulithdemo.SpringModulithDemoApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.modulith.core.ApplicationModules;
 import org.springframework.modulith.docs.Documenter;
@@ -30,15 +31,15 @@ class ModularityTests {
 
     // this no longer works due to the different package structures compared to
     // spring modulith expectation
-//	@Test
-//	void verifiesModularStructure() {
-//        modules.forEach(System.out::println);
+	@Test
+	void verifiesModularStructure() {
+        modules.forEach(System.out::println);
 //		modules.verify();
-//	}
+	}
 
 	@Test
 	void createModuleDocumentation() {
-		new Documenter(modules).writeDocumentation();
+		new Documenter(modules).writeDocumentation().writeAggregatingDocument().writeModulesAsPlantUml();
 	}
 }
 
