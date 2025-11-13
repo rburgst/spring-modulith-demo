@@ -51,14 +51,10 @@ subprojects {
 // Task to validate module dependencies
 tasks.register("validateModuleDependencies") {
     group = "verification"
-    description = "Validates that impl projects don't depend on other impl projects and notification doesn't depend on product"
+    description = "Validates that notification module doesn't depend on product module"
     
     doLast {
         val errors = mutableListOf<String>()
-        
-        // Define which projects are impl vs api
-        val implProjects = setOf("product-impl", "notification-impl", "inventory-impl")
-        val apiProjects = setOf("product-api", "notification-api", "inventory-api")
         
         // Helper function to get project name from dependency
         fun getProjectName(dep: ProjectDependency): String {
@@ -66,47 +62,15 @@ tasks.register("validateModuleDependencies") {
             return path.substring(1) // Remove leading ':'
         }
         
-        // Rule 1: No impl project should depend on another impl project
+        // Rule: Notification module should not depend on product module
         subprojects.forEach { project ->
-            if (project.name in implProjects) {
+            if (project.name == "notification") {
                 project.configurations.getByName("implementation").dependencies
                     .filterIsInstance<ProjectDependency>()
                     .forEach { dep ->
                         val depProjectName = getProjectName(dep)
-                        if (depProjectName in implProjects && depProjectName != project.name) {
-                            errors.add("❌ ${project.name} depends on impl project ${depProjectName}. Impl projects should only depend on api projects.")
-                        }
-                    }
-            }
-        }
-        
-        // Rule 2: Notification modules should not depend on product modules
-        subprojects.forEach { project ->
-            if (project.name.startsWith("notification")) {
-                project.configurations.getByName("implementation").dependencies
-                    .filterIsInstance<ProjectDependency>()
-                    .forEach { dep ->
-                        val depProjectName = getProjectName(dep)
-                        if (depProjectName.startsWith("product")) {
-                            errors.add("❌ ${project.name} depends on product module ${depProjectName}. Notification modules should not depend on product modules.")
-                        }
-                    }
-            }
-        }
-        
-        // Rule 3: Impl projects should only depend on their own api or external dependencies
-        subprojects.forEach { project ->
-            if (project.name in implProjects) {
-                val moduleName = project.name.replace("-impl", "")
-                val expectedApiProject = "$moduleName-api"
-                
-                project.configurations.getByName("implementation").dependencies
-                    .filterIsInstance<ProjectDependency>()
-                    .forEach { dep ->
-                        val depProjectName = getProjectName(dep)
-                        if (depProjectName in apiProjects && depProjectName != expectedApiProject) {
-                            // This is allowed for cross-module api dependencies (e.g., product-impl can use notification-api)
-                            // But we check this in rule 2, so we'll allow it here
+                        if (depProjectName == "product") {
+                            errors.add("❌ ${project.name} depends on product module. Notification module should not depend on product module.")
                         }
                     }
             }
@@ -123,8 +87,7 @@ tasks.register("validateModuleDependencies") {
             println("\n${"=".repeat(80)}")
             println("✅ MODULE DEPENDENCY VALIDATION PASSED")
             println("${"=".repeat(80)}\n")
-            println("✓ No impl projects depend on other impl projects")
-            println("✓ Notification modules do not depend on product modules")
+            println("✓ Notification module does not depend on product module")
             println("✓ All dependency rules are satisfied\n")
         }
     }

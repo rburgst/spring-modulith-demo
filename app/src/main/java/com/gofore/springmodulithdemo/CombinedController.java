@@ -2,8 +2,8 @@ package com.gofore.springmodulithdemo;
 
 import com.gofore.springmodulithdemo.inventory.api.InventoryService;
 import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;
-import com.gofore.springmodulithdemo.product.ProductDTO;
-import com.gofore.springmodulithdemo.product.ProductService;
+import com.gofore.springmodulithdemo.product.api.ProductDTO;
+import com.gofore.springmodulithdemo.product.api.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

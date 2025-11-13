@@ -1,7 +1,7 @@
 package com.gofore.springmodulithdemo;
 
 import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;
-import com.gofore.springmodulithdemo.product.ProductDTO;
+import com.gofore.springmodulithdemo.product.api.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

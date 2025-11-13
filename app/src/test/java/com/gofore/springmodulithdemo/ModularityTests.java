@@ -26,20 +26,23 @@ import org.springframework.modulith.docs.Documenter;
  */
 class ModularityTests {
 
-	ApplicationModules modules = ApplicationModules.of(SpringModulithDemoApplication.class);
+    ApplicationModules modules = ApplicationModules.of(SpringModulithDemoApplication.class);
 
     // this no longer works due to the different package structures compared to
     // spring modulith expectation
-//	@Test
-//	void verifiesModularStructure() {
-//        modules.forEach(System.out::println);
-//		modules.verify();
-//	}
-
 	@Test
-	void createModuleDocumentation() {
-		new Documenter(modules).writeDocumentation();
+	void verifiesModularStructure() {
+        modules.forEach(System.out::println);
+//		modules.verify();
 	}
+
+    @Test
+    void createModuleDocumentation() {
+        new Documenter(modules)
+                .writeDocumentation()
+                .writeModulesAsPlantUml()
+                .writeIndividualModulesAsPlantUml();
+    }
 }
 
 

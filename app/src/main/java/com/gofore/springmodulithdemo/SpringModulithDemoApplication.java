@@ -2,8 +2,8 @@ package com.gofore.springmodulithdemo;
 
 import com.gofore.springmodulithdemo.inventory.api.InventoryService;
 import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;
-import com.gofore.springmodulithdemo.product.ProductDTO;
-import com.gofore.springmodulithdemo.product.ProductService;
+import com.gofore.springmodulithdemo.product.api.ProductDTO;
+import com.gofore.springmodulithdemo.product.api.ProductService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
-@SpringBootApplication
+@SpringBootApplication(proxyBeanMethods = false)
 public class SpringModulithDemoApplication {
 
     public static void main(String[] args) {
