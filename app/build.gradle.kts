@@ -14,6 +14,7 @@ dependencies {
     implementation("org.springframework.modulith:spring-modulith-events-api")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.h2database:h2")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")

@@ -1,6 +1,8 @@
-package com.gofore.springmodulithdemo.product;
+package com.gofore.springmodulithdemo.product.impl;
 
 import com.gofore.springmodulithdemo.notification.api.NotificationDTO;
+import com.gofore.springmodulithdemo.product.ProductDTO;
+import com.gofore.springmodulithdemo.product.ProductService;
 import jakarta.transaction.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;

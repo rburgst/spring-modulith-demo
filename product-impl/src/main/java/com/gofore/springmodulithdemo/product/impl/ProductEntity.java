@@ -1,4 +1,4 @@
-package com.gofore.springmodulithdemo.product;
+package com.gofore.springmodulithdemo.product.impl;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

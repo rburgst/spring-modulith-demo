@@ -1,4 +1,4 @@
-package com.gofore.springmodulithdemo;
+package com.gofore.springmodulithdemo.app;
 
 import com.gofore.springmodulithdemo.inventory.api.InventoryService;
 import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;

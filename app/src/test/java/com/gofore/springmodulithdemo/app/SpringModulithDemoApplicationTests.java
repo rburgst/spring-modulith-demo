@@ -1,4 +1,4 @@
-package com.gofore.springmodulithdemo;
+package com.gofore.springmodulithdemo.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
