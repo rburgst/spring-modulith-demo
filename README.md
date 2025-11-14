@@ -1,6 +1,7 @@
 # Java Modularization approaches
 
 This repository contains various approaches to modularizing Java applications. 
+Note that the code is simple on purpose to focus on the modularization aspects.
 
 Please check out the individual [branches](https://github.com/rburgst/spring-modulith-demo/branches) 
 for the different approaches.
