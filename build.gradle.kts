@@ -1,6 +1,6 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.5.7"
+    id("org.springframework.boot") version "4.0.3"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -18,7 +18,7 @@ repositories {
     mavenCentral()
 }
 
-extra["springModulithVersion"] = "1.4.4"
+extra["springModulithVersion"] = "2.0.3"
 
 dependencies {
     implementation("org.springframework.modulith:spring-modulith-starter-core")
