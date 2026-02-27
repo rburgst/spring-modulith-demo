@@ -13,16 +13,12 @@ public class NotificationServiceImpl implements NotificationService {
     private static final Logger LOG = LoggerFactory.getLogger(NotificationServiceImpl.class);
 
     @Override
-    public void createNotification(Object notification) {
-        if (notification instanceof Notification) {
-            Notification notif = (Notification) notification;
-            LOG.info("Received notification by module dependency for product {} in date {} by {}.",
-              notif.getProductName(),
-              notif.getDate(),
-              notif.getFormat());
-        }
+    public void createNotification(NotificationDTO notification) {
+        LOG.info("Received notification by module dependency for product {} in date {} by {}.",
+                notification.getProductName(),
+                notification.getDate(),
+                notification.getFormat());
     }
-
 
     @EventListener
     public void notificationEvent(NotificationDTO event) {

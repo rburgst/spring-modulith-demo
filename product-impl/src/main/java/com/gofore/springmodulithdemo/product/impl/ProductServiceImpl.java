@@ -1,9 +1,11 @@
 package com.gofore.springmodulithdemo.product.impl;
 
 import com.gofore.springmodulithdemo.notification.api.NotificationDTO;
+import com.gofore.springmodulithdemo.notification.api.NotificationService;
 import com.gofore.springmodulithdemo.product.ProductDTO;
 import com.gofore.springmodulithdemo.product.ProductService;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,15 +16,12 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ApplicationEventPublisher events;
     private final ProductRepository repository;
-
-    public ProductServiceImpl(ApplicationEventPublisher events, ProductRepository repository) {
-        this.events = events;
-        this.repository = repository;
-    }
+//    private final NotificationService notificationService;
 
     @Override
     @Transactional
@@ -54,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
                 product.getStorageLocationId()
         ));
         events.publishEvent(new NotificationDTO(new Date(), "SMS", product.getName()));
+//        notificationService.createNotification(new NotificationDTO(new Date(), "SMS", product.getName()));
         return mapToDto(saved);
     }
 
