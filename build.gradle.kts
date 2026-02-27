@@ -13,11 +13,11 @@ allprojects {
     }
 }
 
-extra["springModulithVersion"] = "1.4.4"
+extra["springModulithVersion"] = "2.0.3"
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:4.0.3")
         mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
     }
 }
@@ -32,11 +32,10 @@ subprojects {
         }
     }
 
-    extra["springModulithVersion"] = "1.4.4"
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:4.0.3")
             mavenBom("org.springframework.modulith:spring-modulith-bom:${property("springModulithVersion")}")
         }
     }
@@ -62,7 +61,8 @@ tasks.register("validateModuleDependencies") {
         
         // Helper function to get project name from dependency
         fun getProjectName(dep: ProjectDependency): String {
-            val path = dep.dependencyProject.path
+            val depProj = project.project(dep.path) //  dep.dependencyProject.path
+            val path = depProj.path
             return path.substring(1) // Remove leading ':'
         }
         
