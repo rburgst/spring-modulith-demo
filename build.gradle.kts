@@ -80,15 +80,15 @@ tasks.register("validateModuleDependencies") {
             }
         }
         
-        // Rule 2: Notification modules should not depend on product modules
+        // Rule 2: Product module should not depend on notification module
         subprojects.forEach { project ->
-            if (project.name.startsWith("notification")) {
+            if (project.name.startsWith("product")) {
                 project.configurations.getByName("implementation").dependencies
                     .filterIsInstance<ProjectDependency>()
                     .forEach { dep ->
                         val depProjectName = getProjectName(dep)
-                        if (depProjectName.startsWith("product")) {
-                            errors.add("❌ ${project.name} depends on product module ${depProjectName}. Notification modules should not depend on product modules.")
+                        if (depProjectName.startsWith("notification")) {
+                            errors.add("❌ ${project.name} depends on notification module ${depProjectName}. Product modules should not depend on notification modules.")
                         }
                     }
             }

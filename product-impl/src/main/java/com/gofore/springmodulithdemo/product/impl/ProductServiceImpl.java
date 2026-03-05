@@ -1,7 +1,6 @@
 package com.gofore.springmodulithdemo.product.impl;
 
-import com.gofore.springmodulithdemo.notification.api.NotificationDTO;
-import com.gofore.springmodulithdemo.notification.api.NotificationService;
+import com.gofore.springmodulithdemo.product.ProductCreated;
 import com.gofore.springmodulithdemo.product.ProductDTO;
 import com.gofore.springmodulithdemo.product.ProductService;
 import jakarta.transaction.Transactional;
@@ -52,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
                 product.getPrice(),
                 product.getStorageLocationId()
         ));
-        events.publishEvent(new NotificationDTO(new Date(), "SMS", product.getName()));
+        events.publishEvent(new ProductCreated(product.getName(), new Date()));
 //        notificationService.createNotification(new NotificationDTO(new Date(), "SMS", product.getName()));
         return mapToDto(saved);
     }
