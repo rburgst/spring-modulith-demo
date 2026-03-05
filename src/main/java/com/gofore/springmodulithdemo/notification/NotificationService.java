@@ -2,10 +2,10 @@ package com.gofore.springmodulithdemo.notification;
 
 import com.gofore.springmodulithdemo.notification.internal.Notification;
 import com.gofore.springmodulithdemo.notification.internal.NotificationType;
+import com.gofore.springmodulithdemo.product.ProductCreated;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
-import org.springframework.modulith.events.ApplicationModuleListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,15 +22,15 @@ public class NotificationService {
 
 
     @EventListener
-    public void notificationEvent(NotificationDTO event) {
-        Notification notification = toEntity(event);
-        LOG.info("Received safe notification by event for product {} in date {} by {}.",
+    public void notificationEvent(ProductCreated event) {
+        Notification notification = createNotificationForProduct(event);
+        LOG.info("Received product created event for product {} in date {} by {}.",
                 notification.getProductName(),
                 notification.getDate(),
                 notification.getFormat());
     }
 
-    private Notification toEntity(NotificationDTO event) {
-        return new Notification(event.getDate(), NotificationType.valueOf(event.getFormat()), event.getProductName());
+    private Notification createNotificationForProduct(ProductCreated event) {
+        return new Notification(event.date(), NotificationType.SMS, event.productName());
     }
 }
