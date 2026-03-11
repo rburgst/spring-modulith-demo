@@ -1,7 +1,7 @@
 package com.gofore.springmodulithdemo.inventory.impl;
 
 import com.gofore.springmodulithdemo.inventory.api.InventoryService;
-import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;
+import com.gofore.springmodulithdemo.inventory.api.StorageLocationDto;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public List<StorageLocationDTO> findFirst(int count) {
+    public List<StorageLocationDto> findFirst(int count) {
         return repository.findAll(Pageable.ofSize(count)).stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -29,7 +29,7 @@ public class InventoryServiceImpl implements InventoryService {
 
 
     @Override
-    public List<StorageLocationDTO> findStorageLocationsByIdSet(Set<UUID> ids) {
+    public List<StorageLocationDto> findStorageLocationsByIdSet(Set<UUID> ids) {
         if (ids == null || ids.isEmpty()) {
             return List.of();
         }
@@ -40,7 +40,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     @Transactional
-    public StorageLocationDTO createStorageLocation(StorageLocationDTO storageLocationDTO) {
+    public StorageLocationDto createStorageLocation(StorageLocationDto storageLocationDTO) {
         StorageLocationEntity entity = new StorageLocationEntity();
         entity.setName(storageLocationDTO.getName());
         entity.setAddress(storageLocationDTO.getAddress());
@@ -48,8 +48,8 @@ public class InventoryServiceImpl implements InventoryService {
         return mapToDTO(savedEntity);
     }
 
-    private  StorageLocationDTO mapToDTO(StorageLocationEntity entity) {
-        return new StorageLocationDTO(entity.getId(), entity.getName(), entity.getAddress());
+    private StorageLocationDto mapToDTO(StorageLocationEntity entity) {
+        return new StorageLocationDto(entity.getId(), entity.getName(), entity.getAddress());
     }
 }
 

@@ -5,10 +5,10 @@ import java.util.Set;
 import java.util.UUID;
 
 public interface InventoryService {
-    List<StorageLocationDTO> findFirst(int count);
-    List<StorageLocationDTO> findStorageLocationsByIdSet(Set<UUID> ids);
+    List<StorageLocationDto> findFirst(int count);
+    List<StorageLocationDto> findStorageLocationsByIdSet(Set<UUID> ids);
 
-    StorageLocationDTO createStorageLocation(StorageLocationDTO storageLocationDTO);
+    StorageLocationDto createStorageLocation(StorageLocationDto storageLocationDTO);
 }
 
 

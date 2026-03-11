@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StorageLocationDTO {
+public class StorageLocationDto {
     private UUID id;
     private String name;
     private String address;

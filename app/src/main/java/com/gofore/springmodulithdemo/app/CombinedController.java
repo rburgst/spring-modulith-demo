@@ -1,7 +1,7 @@
 package com.gofore.springmodulithdemo.app;
 
 import com.gofore.springmodulithdemo.inventory.api.InventoryService;
-import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;
+import com.gofore.springmodulithdemo.inventory.api.StorageLocationDto;
 import com.gofore.springmodulithdemo.product.ProductDto;
 import com.gofore.springmodulithdemo.product.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +37,7 @@ public class CombinedController {
     }
 
     private List<ProductWithLocationDto> combineProductsWithLocations(List<ProductDto> products) {
-        Map<UUID, StorageLocationDTO> locationMap = getStorageLocationsMap(products);
+        Map<UUID, StorageLocationDto> locationMap = getStorageLocationsMap(products);
         
         return products.stream()
                 .map(product -> new ProductWithLocationDto(
@@ -49,7 +49,7 @@ public class CombinedController {
                 .collect(Collectors.toList());
     }
 
-    private Map<UUID, StorageLocationDTO> getStorageLocationsMap(List<ProductDto> products) {
+    private Map<UUID, StorageLocationDto> getStorageLocationsMap(List<ProductDto> products) {
         // Extract storage location IDs from products
         Set<UUID> storageLocationIds = products.stream()
                 .map(ProductDto::getStorageLocationId)
@@ -57,11 +57,11 @@ public class CombinedController {
                 .collect(Collectors.toSet());
         
         // Get storage locations by IDs
-        List<StorageLocationDTO> storageLocations = inventoryService.findStorageLocationsByIdSet(storageLocationIds);
+        List<StorageLocationDto> storageLocations = inventoryService.findStorageLocationsByIdSet(storageLocationIds);
         
         // Create a map of location ID to location for easy lookup
         return storageLocations.stream()
-                .collect(Collectors.toMap(StorageLocationDTO::getId, location -> location));
+                .collect(Collectors.toMap(StorageLocationDto::getId, location -> location));
     }
 }
 
