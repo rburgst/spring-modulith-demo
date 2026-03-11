@@ -2,7 +2,7 @@ package com.gofore.springmodulithdemo.app;
 
 import com.gofore.springmodulithdemo.inventory.api.InventoryService;
 import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;
-import com.gofore.springmodulithdemo.product.ProductDTO;
+import com.gofore.springmodulithdemo.product.ProductDto;
 import com.gofore.springmodulithdemo.product.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,22 +25,22 @@ public class CombinedController {
     }
 
     @GetMapping("/products-with-locations")
-    public List<ProductWithLocationDTO> getProductsWithLocations(@RequestParam Set<UUID> ids) {
-        List<ProductDTO> products = productService.findProductsByIdSet(ids);
+    public List<ProductWithLocationDto> getProductsWithLocations(@RequestParam Set<UUID> ids) {
+        List<ProductDto> products = productService.findProductsByIdSet(ids);
         return combineProductsWithLocations(products);
     }
 
     @GetMapping("/products")
-    public List<ProductWithLocationDTO> findFirstProducts(@RequestParam(defaultValue = "10") int limit) {
-        List<ProductDTO> products = productService.findFirstProducts(limit);
+    public List<ProductWithLocationDto> findFirstProducts(@RequestParam(defaultValue = "10") int limit) {
+        List<ProductDto> products = productService.findFirstProducts(limit);
         return combineProductsWithLocations(products);
     }
 
-    private List<ProductWithLocationDTO> combineProductsWithLocations(List<ProductDTO> products) {
+    private List<ProductWithLocationDto> combineProductsWithLocations(List<ProductDto> products) {
         Map<UUID, StorageLocationDTO> locationMap = getStorageLocationsMap(products);
         
         return products.stream()
-                .map(product -> new ProductWithLocationDTO(
+                .map(product -> new ProductWithLocationDto(
                         product,
                         product.getStorageLocationId() != null 
                                 ? locationMap.get(product.getStorageLocationId()) 
@@ -49,10 +49,10 @@ public class CombinedController {
                 .collect(Collectors.toList());
     }
 
-    private Map<UUID, StorageLocationDTO> getStorageLocationsMap(List<ProductDTO> products) {
+    private Map<UUID, StorageLocationDTO> getStorageLocationsMap(List<ProductDto> products) {
         // Extract storage location IDs from products
         Set<UUID> storageLocationIds = products.stream()
-                .map(ProductDTO::getStorageLocationId)
+                .map(ProductDto::getStorageLocationId)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         

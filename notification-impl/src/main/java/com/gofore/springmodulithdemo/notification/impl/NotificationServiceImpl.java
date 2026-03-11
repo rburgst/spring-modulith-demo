@@ -1,6 +1,6 @@
 package com.gofore.springmodulithdemo.notification.impl;
 
-import com.gofore.springmodulithdemo.notification.api.NotificationDTO;
+import com.gofore.springmodulithdemo.notification.api.NotificationDto;
 import com.gofore.springmodulithdemo.notification.api.NotificationService;
 import com.gofore.springmodulithdemo.product.ProductCreated;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ public class NotificationServiceImpl implements NotificationService {
     private static final Logger LOG = LoggerFactory.getLogger(NotificationServiceImpl.class);
 
     @Override
-    public void createNotification(NotificationDTO notification) {
+    public void createNotification(NotificationDto notification) {
         LOG.info("Received notification by direct module dependency for product {} at date {} by {}.",
                 notification.getProductName(),
                 notification.getDate(),

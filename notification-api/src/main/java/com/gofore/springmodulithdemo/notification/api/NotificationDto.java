@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class NotificationDTO {
+public class NotificationDto {
     private Date date;
     private String format;
     private String productName;

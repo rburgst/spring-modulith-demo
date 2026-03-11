@@ -1,7 +1,7 @@
 package com.gofore.springmodulithdemo;
 
 import com.gofore.springmodulithdemo.inventory.api.InventoryService;
-import com.gofore.springmodulithdemo.product.ProductDTO;
+import com.gofore.springmodulithdemo.product.ProductDto;
 import com.gofore.springmodulithdemo.product.ProductService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +18,7 @@ public class SpringModulithDemoApplication {
     @Bean
     public ApplicationRunner applicationRunner(ProductService productService, InventoryService inventoryService) {
         return args -> {
-            productService.createSafe(new ProductDTO("Sample Product", "This is a sample product", 100, null));
+            productService.createSafe(new ProductDto("Sample Product", "This is a sample product", 100, null));
 //            List<StorageLocationDTO> locations = inventoryService.findFirst(5);
 //            if (locations.isEmpty()) {
 //                final StorageLocationDTO created = inventoryService.createStorageLocation(new StorageLocationDTO(null, "Main Warehouse", "1234 Warehouse St."));

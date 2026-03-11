@@ -1,7 +1,7 @@
 package com.gofore.springmodulithdemo.app;
 
 import com.gofore.springmodulithdemo.inventory.api.StorageLocationDTO;
-import com.gofore.springmodulithdemo.product.ProductDTO;
+import com.gofore.springmodulithdemo.product.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductWithLocationDTO {
-    private ProductDTO product;
+public class ProductWithLocationDto {
+    private ProductDto product;
     private StorageLocationDTO storageLocation;
 }
 

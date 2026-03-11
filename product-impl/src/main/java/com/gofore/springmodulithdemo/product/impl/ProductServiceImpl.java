@@ -1,7 +1,7 @@
 package com.gofore.springmodulithdemo.product.impl;
 
 import com.gofore.springmodulithdemo.product.ProductCreated;
-import com.gofore.springmodulithdemo.product.ProductDTO;
+import com.gofore.springmodulithdemo.product.ProductDto;
 import com.gofore.springmodulithdemo.product.ProductService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public List<ProductDTO> findProductsByIdSet(Set<UUID> ids) {
+    public List<ProductDto> findProductsByIdSet(Set<UUID> ids) {
         if (ids == null || ids.isEmpty()) {
             return List.of();
         }
@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public List<ProductDTO> findFirstProducts(int limit) {
+    public List<ProductDto> findFirstProducts(int limit) {
         if (limit <= 0) {
             return List.of();
         }
@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductDTO createSafe(ProductDTO product) {
+    public ProductDto createSafe(ProductDto product) {
         ProductEntity saved = repository.save(new ProductEntity(
                 product.getId(),
                 product.getName(),
@@ -57,8 +57,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    private ProductDTO mapToDto(ProductEntity entity) {
-        return new ProductDTO(
+    private ProductDto mapToDto(ProductEntity entity) {
+        return new ProductDto(
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
         );
     }
 
-    private List<ProductDTO> mapToDtoList(List<ProductEntity> products) {
+    private List<ProductDto> mapToDtoList(List<ProductEntity> products) {
         return products.stream()
                 .map(this::mapToDto)
                 .toList();

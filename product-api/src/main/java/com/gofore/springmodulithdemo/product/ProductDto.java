@@ -9,14 +9,14 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
+public class ProductDto {
     private UUID id;
     private String name;
     private String description;
     private int price;
     private UUID storageLocationId;
 
-    public ProductDTO(String name, String description, int price, UUID storageLocationId) {
+    public ProductDto(String name, String description, int price, UUID storageLocationId) {
         this.name = name;
         this.description = description;
         this.price = price;
